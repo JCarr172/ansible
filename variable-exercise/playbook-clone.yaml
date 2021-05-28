@@ -1,0 +1,11 @@
+- hosts: all
+  become: true
+  vars:
+    git_repo: "https://github.com/JCarr172/Test_Repo"
+  tasks:
+  - name: Clone repo
+    git:
+      repo: "{{ git_repo }}"
+      dest: /home/james/variable-exercise
+      version: main
+      clone: yes

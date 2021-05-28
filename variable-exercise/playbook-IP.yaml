@@ -1,0 +1,13 @@
+- hosts: all
+  become: true
+  vars:
+    host_ip: "{{ ansible_default_ipv4.address }}"
+  tasks:
+  - name: Creating a file
+    copy:
+      dest: "/home/james/file"
+      content: "{{ host_ip }}"
+
+  - name: Print hostvars
+    debug:
+      msg: "{{ ansible_default_ipv4.address }}" 
