@@ -1,0 +1,37 @@
+---
+# tasks file for docker
+
+- name: apt install
+  apt: 
+    pkg: 
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: true
+  register: docker_install
+
+- name: apt key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: apt repo
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: apt install 2
+  apt: 
+    pkg: 
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+    update_cache: true
+
+- name: Debug module
+  debug:
+    msg: "{{ docker_install }}"

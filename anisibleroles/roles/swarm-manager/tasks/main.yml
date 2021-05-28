@@ -1,0 +1,6 @@
+---
+# tasks file for swarm-manager
+- name: Start new swarm
+  community.docker.docker_swarm:
+    state: present
+    register: {{ swarm_facts.joinstokens.worker }}
